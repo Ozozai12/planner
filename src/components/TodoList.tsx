@@ -1,22 +1,40 @@
-import { TodoItem } from "./TodoItem"
+import { TodoItem } from "./TodoItem";
 
-import {ITodo} from '../types/data'
+import { ITodo } from "../types/data";
+
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 interface ITodoListProps {
-    items: ITodo[],
-    removeTodo: (id: string) => void,
-    toggleTodo: (id: string) => void
+  items: ITodo[];
+  removeTodo: (id: string) => void;
+  toggleTodo: (id: string) => void;
 }
 
 const TodoList: React.FC<ITodoListProps> = (props) => {
-    const {items, toggleTodo, removeTodo } = props;
+  const { items, toggleTodo, removeTodo } = props;
 
-    return <>
-        {items.map(todo => (<TodoItem key={todo.id}
-            removeTodo={removeTodo}
-            toggleTodo={toggleTodo}
-            {...todo} />))}
+  return (
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+        >
+          {items.map((todo) => (
+            <Grid item xs={2} sm={4} md={4} key={todo.id}>
+              <TodoItem
+                removeTodo={removeTodo}
+                toggleTodo={toggleTodo}
+                {...todo}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </>
- }
+  );
+};
 
-export {TodoList}
+export { TodoList };
