@@ -1,30 +1,52 @@
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+import { ContactsList } from "./ContactsList";
+import { IContact } from "../types/data";
+
+import { Container } from "@mui/material";
+import Typography from "@mui/material/Typography";
+
 const hardContacts = [
   {
     id: "1",
-    title: "Ozozai Bam",
-    complete: false,
+    name: "Ozozai Bam",
+    number: "+1122233454544",
   },
   {
     id: "2",
-    title: "Kateryna Oliynyk",
-    complete: false,
+    name: "Kateryna Oliynyk",
+    number: "+4534563634562",
   },
   {
     id: "3",
-    title: "San Sanych",
-    complete: false,
+    name: "San Sanych",
+    number: "+54364563234534",
   },
   {
     id: "4",
-    title: "Learn typescript",
-    complete: false,
+    name: "Valeriy Zaluzhniy",
+    number: "+34235451343432",
   },
 ];
 
-export const Contacts = () => {
+const Contacts: React.FC = () => {
+  const [contacts, setContacts] = useState<IContact[]>(hardContacts);
+
   return (
-    <div>
-      <h1>Contacts</h1>
-    </div>
+    <Container>
+      <Typography variant="h3" component="h2" sx={{ mt: "15px", mb: "15px" }}>
+        Contacts
+      </Typography>
+      {contacts.length === 0 ? (
+        <Typography variant="h5" component="span">
+          Nothing to do.
+        </Typography>
+      ) : (
+        <ContactsList items={contacts} />
+      )}
+    </Container>
   );
 };
+
+export { Contacts };
